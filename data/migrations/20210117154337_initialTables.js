@@ -19,8 +19,8 @@ exports.up = function(knex) {
                 .notNullable()
                 .references('id')
                 .inTable('recipes')
-                .onUpdate('CASCADES')
-                .onDelete('CASCADES');
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
         })
         .createTable('ingredient_types', (table) => {
             // chopped, diced, minced, frozen, dried, canned, fresh, boneless, etc.
@@ -28,7 +28,7 @@ exports.up = function(knex) {
             table.text('name')
                 .notNullable();
         })
-        .createTable('ingredient_form', (table) => {
+        .createTable('ingredient_forms', (table) => {
             // solid, liquid, discrete
             table.increments();
             table.text('name')
@@ -44,7 +44,7 @@ exports.up = function(knex) {
             table.integer('form_id')
                 .notNullable()
                 .references('id')
-                .inTable('ingredient_form')
+                .inTable('ingredient_forms')
                 .onUpdate('RESTRICT')
                 .onDelete('RESTRICT');
             table.integer('type_id')
@@ -58,14 +58,14 @@ exports.up = function(knex) {
                 .notNullable()
                 .references('id')
                 .inTable('recipes')
-                .onDelete('CASCADES')
-                .onDelete('CASCADES');
+                .onDelete('CASCADE')
+                .onDelete('CASCADE');
             table.integer('ingredient_id')
                 .notNullable()
                 .references('id')
                 .inTable('ingredients')
-                .onDelete('CASCADES')
-                .onDelete('CASCADES');
+                .onDelete('CASCADE')
+                .onDelete('CASCADE');
             table.float('quantity')
                 .notNullable();
         })
@@ -79,6 +79,6 @@ exports.down = function(knex) {
         .dropTableIfExists('instructions')
         .dropTableIfExists('ingredients')
         .dropTableIfExists('ingredient_types')
-        .dropTableIfExists('ingredient_form')
+        .dropTableIfExists('ingredient_forms')
         .dropTableIfExists('recipe_ingredient_rel');
 };
