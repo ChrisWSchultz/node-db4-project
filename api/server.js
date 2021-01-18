@@ -4,6 +4,7 @@ const express = require('express')
 // middleware imports
 
 // route imports
+const recipes = require('./routes/recipes')
 
 // app
 const app = express()
@@ -15,6 +16,6 @@ app.use(express.json())
 
 
 // routes
-app.use('/api', )
+app.use('/api', recipes)
 
 module.exports = app
